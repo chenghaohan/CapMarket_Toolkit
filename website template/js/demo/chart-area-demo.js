@@ -1,118 +1,112 @@
-// Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#858796';
-
-function number_format(number, decimals, dec_point, thousands_sep) {
-  // *     example: number_format(1234.56, 2, ',', ' ');
-  // *     return: '1 234,56'
-  number = (number + '').replace(',', '').replace(' ', '');
-  var n = !isFinite(+number) ? 0 : +number,
-    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-    s = '',
-    toFixedFix = function(n, prec) {
-      var k = Math.pow(10, prec);
-      return '' + Math.round(n * k) / k;
-    };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-  if (s[0].length > 3) {
-    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-  }
-  if ((s[1] || '').length < prec) {
-    s[1] = s[1] || '';
-    s[1] += new Array(prec - s[1].length + 1).join('0');
-  }
-  return s.join(dec);
+/**
+ * Helper function to select stock data
+ * Returns an array of values
+ * @param {array} rows
+ * @param {integer} index
+ * index 0 - Date
+ * index 1 - Open
+ * index 2 - High
+ * index 3 - Low
+ * index 4 - Close
+ * index 5 - Volume
+ */
+ function unpack(rows, index) {
+  return rows.map(function(row) {
+    return row[index];
+  });
 }
 
-// Area Chart Example
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-      label: "Earnings",
-      lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
-    }],
-  },
-  options: {
-    maintainAspectRatio: false,
-    layout: {
-      padding: {
-        left: 10,
-        right: 25,
-        top: 25,
-        bottom: 0
+// Submit Button handler
+function handleSubmit() {
+  // Prevent the page from refreshing
+  d3.event.preventDefault();
+
+  // Select the input value from the form
+  var stock = d3.select("#stockInput").node().value;
+  console.log(stock);
+
+  // clear the input value
+  d3.select("#stockInput").node().value = "";
+
+  // Build the plot with the new stock
+  buildPlot(stock);
+}
+
+function buildPlot(stock) {
+  var apiKey = "1xZykrsEcbQV-ykywF4S";
+
+  var url = `https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?start_date=2018-01-01&api_key=${apiKey}`;
+
+  d3.json(url).then(function(data) {
+
+    // Grab values from the response json object to build the plots
+    var name = data.dataset.name;
+    var stock = data.dataset.dataset_code;
+    var startDate = data.dataset.start_date;
+    var endDate = data.dataset.end_date;
+    var dates = unpack(data.dataset.data, 0);
+    var openingPrices = unpack(data.dataset.data, 1);
+    var highPrices = unpack(data.dataset.data, 2);
+    var lowPrices = unpack(data.dataset.data, 3);
+    var closingPrices = unpack(data.dataset.data, 4);
+
+    // var trace1 = {
+    //   type: "scatter",
+    //   mode: "lines",
+    //   name: name,
+    //   x: dates,
+    //   y: closingPrices,
+    //   line: {
+    //     color: "#17BECF"
+    //   }
+    // };
+
+    // Candlestick Trace
+    var trace2 = {
+      type: "candlestick",
+      x: dates,
+      high: highPrices,
+      low: lowPrices,
+      open: openingPrices,
+      close: closingPrices
+    };
+
+    var data = [trace2];
+
+    var layout = {
+      xaxis: {
+        range: [startDate, endDate],
+        type: "date",
+        rangeselector: {
+        x: 0,
+        y: 1.2,
+        xanchor: 'left',
+        font: {size:8},
+        buttons: [{
+            step: 'month',
+            stepmode: 'backward',
+            count: 1,
+            label: '1 month'
+        }, {
+            step: 'month',
+            stepmode: 'backward',
+            count: 6,
+            label: '6 months'
+        }, {
+            step: 'all',
+            label: 'All dates'
+        }]
       }
-    },
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'date'
-        },
-        gridLines: {
-          display: false,
-          drawBorder: false
-        },
-        ticks: {
-          maxTicksLimit: 7
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          maxTicksLimit: 5,
-          padding: 10,
-          // Include a dollar sign in the ticks
-          callback: function(value, index, values) {
-            return '$' + number_format(value);
-          }
-        },
-        gridLines: {
-          color: "rgb(234, 236, 244)",
-          zeroLineColor: "rgb(234, 236, 244)",
-          drawBorder: false,
-          borderDash: [2],
-          zeroLineBorderDash: [2]
-        }
-      }],
-    },
-    legend: {
-      display: false
-    },
-    tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      titleMarginBottom: 10,
-      titleFontColor: '#6e707e',
-      titleFontSize: 14,
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      intersect: false,
-      mode: 'index',
-      caretPadding: 10,
-      callbacks: {
-        label: function(tooltipItem, chart) {
-          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
-        }
+      },
+      yaxis: {
+        autorange: true,
+        type: "linear"
       }
-    }
-  }
-});
+    };
+
+    Plotly.newPlot("candlePlot", data, layout);
+  });
+}
+
+// Add event listener for submit button
+d3.select("#submit").on("click", handleSubmit);
