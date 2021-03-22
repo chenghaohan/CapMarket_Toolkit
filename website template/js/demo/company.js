@@ -34,25 +34,64 @@ const getFormattedCurrency = (currency, amount) => new Intl.NumberFormat(undefin
     
     var url = `https://financialmodelingprep.com/api/v3/balance-sheet-statement/${stock}?apikey=${apiKey}&limit=1` ;
 
-    d3.json(url).then(function (data){
-
-        console.log(data);
 
 
-    });
+    
 
 };
 //-------------------Function to build the income statement-----------------------------------------------------------------
 
 function createMap (stock){
 
-    var url = `https://financialmodelingprep.com/api/v3/income-statement/${stock}?limit=1&apikey=${apiKey}`;
+    url = `https://financialmodelingprep.com/api/v3/profile/${stock}?apikey=e22042cb161e2d1917a06964e0036d91`;
     
     d3.json(url).then(function (data){
 
-        console.log(data);
-    });
+        var add = data.map(d => d.address);
+        var city = data.map(d => d.city);
+        var state = data.map(d => d.state);
+        var country = data.map(d => d.country);
+        var address = `${add}, ${city}, ${state}, ${country}`
 
+        google.maps.event.addDomListener(window, 'load', intilize);
+
+        function intilize (){
+            var autocomplete = new google.maps.places.Autocomplete(address);
+            google.maps.event.addListener(autocomplete, 'place_changed', function (){
+                var place = autocomplete.getPlace();
+                var lat = place.geometry.location.A;
+                var lng = place.geometry.location.F;
+                var coord = [lat, lng];
+                console.log(coord)
+            });
+    };
+});
+
+
+    
+
+        
+    // }
+
+
+    // var MAP_KEY = "pk.eyJ1IjoidG9vb255aGFuIiwiYSI6ImNra2VuODBhaTAwejYydnBlNW95cHc0aTQifQ.lDJ6660vKFDESAP286lP9g";
+
+    // //Create a map
+    // var myMap = L.map("mapid", {
+    //     center: [37.09, -95.71],
+    //     zoom: 3
+    // });
+
+    // //This step is creating a mapbox map layer and add it to myMap
+    // L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    //     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+    //     tileSize: 512,
+    //     maxZoom: 18,
+    //     zoomOffset: -1,
+    //     id: "mapbox/streets-v11",
+    //     accessToken: MAP_KEY
+    // }).addTo(myMap);
+   
 };
 
 //--------------------------------------------------------------------------------------------------------------------------
