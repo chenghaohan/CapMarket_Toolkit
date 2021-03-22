@@ -142,90 +142,9 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Company Information</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id = "download"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Company Name</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="companyName"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-building fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Price (Closing)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="close_price"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Market Cap
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="mktcap"></div>
-                                                </div>
-        
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-funnel-dollar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Average Volume</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="vol"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-chart-bar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Content Row -->
@@ -233,13 +152,13 @@
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-7 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <i class= "fas fa-chart-area"></i>
-                                    <h6 class="m-0 font-weight-bold text-primary">Chart - Candleline</h6>
+                                    <i class="fas fa-building"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary">PROFILE</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -255,13 +174,14 @@
                             </div>
                         </div>
 
-                        <!-- Gauge Graph -->
-                        <div class="col-xl-4 col-lg-5">
+                        <!-- map -->
+                        <div class="col-xl-5 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Investment Recommendation</h6>
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary">LOCATION</h6>
                                     <div class="dropdown no-arrow">
                                         <a  href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
                                     </div>
@@ -322,7 +242,7 @@
     <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/DB_candlestick.js"></script>
+    <script src="js/demo/company.js"></script>
 
 
 </body>
