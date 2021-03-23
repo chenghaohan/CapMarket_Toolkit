@@ -27,13 +27,29 @@ const getFormattedCurrency = (currency, amount) => new Intl.NumberFormat(undefin
 
   }
   
-  var apiKey = "e22042cb161e2d1917a06964e0036d91";
-  
   //-----------------Function to build the balance sheet--------------------------------
   function updateCompany (stock){
     
-    var url = `https://financialmodelingprep.com/api/v3/balance-sheet-statement/${stock}?apikey=${apiKey}&limit=1` ;
+    var url = url = `https://financialmodelingprep.com/api/v3/profile/${stock}?apikey=e22042cb161e2d1917a06964e0036d91`;
 
+    d3.json(url).then(function (data) {
+
+        var company = data[0].companyName;
+        var intro = data[0].description;
+        var link = data[0].website;
+
+        document.getElementById("co_name").innerHTML =company;
+        
+        document.getElementById("intro").innerHTML =intro;
+
+        document.getElementById("co_name").href = link;
+        
+
+        console.log(link);
+
+
+
+    })
 
 
     

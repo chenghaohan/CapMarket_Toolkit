@@ -142,10 +142,10 @@
                 <div class="container-fluid" id = "exportReport">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Company Information</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id = "download"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" >
+                        <h1 class="h3 mb-0 text-gray-800" ><a id="co_name" target="_blank"></a></h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id = "download">
+                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
@@ -167,31 +167,31 @@
                                     </div>
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body" >
-                                    <div class="chart-area" id="candlePlot">
+                                <div class="card-body" id="intro" >
+                                    <div class="chart-area" >
                                         <!-- <canvas ></canvas> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- map -->
+                        <!-- Financial Summary -->
                         <div class="col-xl-5 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <i class="fas fa-map-marked-alt"></i>
-                                    <h6 class="m-0 font-weight-bold text-primary">LOCATION</h6>
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary">SUMMARY</h6>
                                     <div class="dropdown no-arrow">
                                         <a  href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-2 pb-2" id="myGauge">
+                                    <div class="chart-pie pt-2 pb-2" id="summary">
                                     </div>
-                                    <div class="mt-4 text-left small" id='recommend'>
+                                    <div class="mt-4 text-left small" id='summary'>
                                         <h4 class="small font-weight-bold"></h4>
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Capital Market Toolkit 2021</span>
+                        <span>Copyright &copy; Chenghao Han</span>
                     </div>
                 </div>
             </footer>
