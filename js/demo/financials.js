@@ -38,6 +38,14 @@ const getCurrency = (currency, amount) => new Intl.NumberFormat(undefined, {
 
     d3.json(url).then(function (data){
 
+        var name = data[0].symbol;
+        var date = data[0].date;
+        var fs_name = name + " Financial Statements as of "+date;
+        var fs_link = data[0].link;
+
+        document.getElementById("fs_name").innerHTML = fs_name;
+        document.getElementById("fs_name").href = fs_link;
+
         var accountpayables = data[0].accountPayables;
         var accumulatedothercomprehensiveincomeloss = data[0].accumulatedOtherComprehensiveIncomeLoss;
         var cashandcashequivalents = data[0].cashAndCashEquivalents;
