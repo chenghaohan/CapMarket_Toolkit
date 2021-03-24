@@ -22,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
 </head>
 
@@ -121,7 +120,7 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search stock symbols..."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search currency symbols..."
                                 aria-label="Search" aria-describedby="basic-addon2" id = "stockInput">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" id = "submit">
@@ -142,99 +141,32 @@
                 <div class="container-fluid" id = "exportReport">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4" >
-                        <h1 class="h3 mb-0 text-gray-800" ><a id="co_name" target="_blank"></a></h1>
-                        <img id="myImg" alt="companypic" width="50" height="50">
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id = "download">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Real Time FX Rate Data</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id = "download"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
-
                     <div class="row">
 
-                        <!-- Area Chart -->
-                        <div class="col-xl-7 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <i class="fas fa-building"></i>
-                                    <h6 class="m-0 font-weight-bold text-primary">PROFILE</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body" id="intro" >
-                                    <div class="chart-area" >
-                                        <!-- <canvas ></canvas> -->
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-12 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary mb-2">
+                                                Cap Market Toolkit Notification: </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="companyName">This function is under development, please come back and check later...... Thank you!</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-laugh-wink"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Financial Summary -->
-                        <div class="col-xl-5 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <i class="fas fa-money-check-alt"></i>
-                                    <h6 class="m-0 font-weight-bold text-primary">SUMMARY</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a  href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                    </div>
-                                </div>
-                            <!-- Table Body -->
-                                <div class="card-body" >
-                                    <div class="table-responsive">
-                                        <table class = "table table-striped" id="myTable">
-                                            <tr>
-                                                <th>CEO:</th>
-                                                <td></td>
-                                              </tr> 
-                                                <th>Industry:</th>
-                                                <td></td>
-                                              </tr>
-                                              <tr>
-                                                <th>ISIN:</th>
-                                                <td></td>
-                                              </tr>
-                                              <tr>
-                                                <th>CUSIP:</th>
-                                                <td></td>
-                                              </tr>
-                                              <tr>
-                                                <th>Exchange Market:</th>
-                                                <td></td>
-                                              </tr>
-                                              <tr>
-                                                <th>Price Range:</th>
-                                                <td></td>
-                                              </tr>
-                                              <tr>
-                                                <th>BETA:</th>
-                                                <td></td>
-                                              </tr>
-                                              <tr>
-                                                <th>Last DIV:</th>
-                                                <td></td>
-                                              </tr>
-                                              <tr>
-                                                <th>IPO Date:</th>
-                                                <td></td>
-                                              </tr>
-                                              
-                                              
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -275,12 +207,6 @@
 
     <!-- download pdf report of dashboard-->    
     <script src="js/demo/pdf.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/company.js"></script>
 
 
 </body>
