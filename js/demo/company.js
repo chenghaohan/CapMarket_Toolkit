@@ -10,13 +10,13 @@
   d3.select("#stockInput").node().value = "";
   
   updateCompany(stock);
-
+  updateNews(stock);
   }
-  
   //----------------------------------------------------------------------------------------------------------------------------
   
   function init () {
   updateCompany("AAPL");
+  updateNews("AAPL");
 
   }
   
@@ -64,72 +64,60 @@
         myTable.rows[7].cells[1].innerHTML = dividend;
         myTable.rows[8].cells[1].innerHTML = ipo;
 
-    })
+    });
 };
-//-------------------Function to build the income statement-----------------------------------------------------------------
+//-------------------Function to build the News Card-----------------------------------------------------------------
 
-// function updateTable (stock){
+function updateNews (stock){
 
-//     var url = `https://financialmodelingprep.com/api/v3/profile/${stock}?apikey=e22042cb161e2d1917a06964e0036d91`;
+    var url = `https://financialmodelingprep.com/api/v3/stock_news?tickers=${stock}&limit=3&apikey=e22042cb161e2d1917a06964e0036d91`;
     
-//     d3.json(url).then(function (data){
-
-//         var ceo = json
-
-
-
-
-
-//     });
-
-
-   
-// };
+    d3.json(url).then(function (data){
+      // track image in api database
+      var img1 = data[0].image;
+      var img2 = data[1].image;
+      var img3 = data[2].image;
+      // track new title in api database
+      var title1 = data[0].title;
+      var title2 = data[1].title;
+      var title3 = data[2].title;
+      // track news content in api database
+      var txt1 = data[0].text;
+      var txt2 = data[1].text;
+      var txt3 = data[2].text;
+      // track news date in api database
+      var date1 = data[0].publishedDate;
+      var date2 = data[1].publishedDate;
+      var date3 = data[2].publishedDate;
+      // track new link in api database
+      var link1 = data[0].url;
+      var link2 = data[1].url;
+      var link3 = data[2].url;
+      //update news image
+      document.getElementById("news_pic1").src =img1;
+      document.getElementById("news_pic2").src =img2;
+      document.getElementById("news_pic3").src =img3;
+      //update news title
+      document.getElementById("title1").innerHTML =title1;
+      document.getElementById("title2").innerHTML =title2;
+      document.getElementById("title3").innerHTML =title3;
+      //update news brief content
+      document.getElementById("txt_1").innerHTML =txt1;
+      document.getElementById("txt_2").innerHTML =txt2;
+      document.getElementById("txt_3").innerHTML =txt3;
+      //update news date
+      document.getElementById("date1").innerHTML =date1;
+      document.getElementById("date2").innerHTML =date2;
+      document.getElementById("date3").innerHTML =date3;
+      //update news link
+      document.getElementById("ext_link_1").href =link1;
+      document.getElementById("ext_link_2").href =link2;
+      document.getElementById("ext_link_3").href =link3;  
+    });
+};
 
 //--------------------------------------------------------------------------------------------------------------------------
   // Add event listener for submit button
   d3.select("#submit").on("click", handleSubmit);
   // initiate the function
   init();
-  
-  //---------------------------------------------------------------------------------------------------------------------
-  
-//         var add = data.map(d => d.address);
-//         var city = data.map(d => d.city);
-//         var state = data.map(d => d.state);
-//         var country = data.map(d => d.country);
-//         var address = `${add}, ${city}, ${state}, ${country}`
-
-//         google.maps.event.addDomListener(window, 'load', intilize);
-
-//         function intilize (){
-//             var autocomplete = new google.maps.places.Autocomplete(address);
-//             google.maps.event.addListener(autocomplete, 'place_changed', function (){
-//                 var place = autocomplete.getPlace();
-//                 var lat = place.geometry.location.A;
-//                 var lng = place.geometry.location.F;
-//                 var coord = [lat, lng];
-//                 console.log(coord)
-//             });
-//     };
-// });   
-    // }
-
-
-    // var MAP_KEY = "pk.eyJ1IjoidG9vb255aGFuIiwiYSI6ImNra2VuODBhaTAwejYydnBlNW95cHc0aTQifQ.lDJ6660vKFDESAP286lP9g";
-
-    // //Create a map
-    // var myMap = L.map("mapid", {
-    //     center: [37.09, -95.71],
-    //     zoom: 3
-    // });
-
-    // //This step is creating a mapbox map layer and add it to myMap
-    // L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    //     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-    //     tileSize: 512,
-    //     maxZoom: 18,
-    //     zoomOffset: -1,
-    //     id: "mapbox/streets-v11",
-    //     accessToken: MAP_KEY
-    // }).addTo(myMap);
